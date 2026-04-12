@@ -12,7 +12,11 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<section class="hero">
+			<div class="falling-container">
+				<h1>HALO!</h1>
+			</div>
+		</section>
 	</body>
 	<script>
 		//@ts-nocheck
@@ -27,9 +31,11 @@
 		// create an engine
 		var engine = Engine.create();
 
+		// call the element
+		const fallingContainer = document.querySelector('.falling-container')
 		// create a renderer
 		var render = Render.create({
-			element: document.body,
+			element: fallingContainer,
 			engine: engine,
 		});
 
