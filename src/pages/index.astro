@@ -20,16 +20,31 @@
 	</body>
 	<script>
 		//@ts-nocheck
-		import Matter from "matter-js";
+		import { createConsoleLogger } from "astro/app";
+import { Picture } from "astro:assets";
+import Matter from "matter-js";
 		// module aliases
 		var Engine = Matter.Engine,
 			Render = Matter.Render,
 			Runner = Matter.Runner,
 			Bodies = Matter.Bodies,
-			Composite = Matter.Composite;
+			Body = Matter.Body,
+			Composite = Matter.Composite,
+			Mouse = Matter.Mouse,
+			MouseConstraint = Matter.MouseConstraint,
+			Events = Matter.Events;
+
 
 		// create an engine
-		var engine = Engine.create();
+		var engine = Engine.create({
+			gravity:{
+				 	scale: 0.001,
+					x: 0,
+					y: 1,
+			}
+		}
+		);
+
 
 		// call the element
 		const fallingContainer = document.querySelector('.falling-container')
@@ -39,13 +54,27 @@
 			engine: engine,
 		});
 
+		let mouse = Mouse.create(render.canvas)
+		let mouseConstraint = MouseConstraint.create(
+			engine,{
+				mouse: mouse
+			}
+		)
+			//sync?
+		render.mouse = mouse;
+
+
 		// create two boxes and a ground
 		var boxA = Bodies.rectangle(400, 200, 80, 80);
-		var boxB = Bodies.rectangle(450, 50, 80, 80);
+		var boxB = Bodies.rectangle(450, 50, 80, 80, {
+			restitution: 1
+		});
 		var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
 
+		console.log(Bodies.rectangle())
+		
 		// add all of the bodies to the world
-		Composite.add(engine.world, [boxA, boxB, ground]);
+		Composite.add(engine.world, [boxA, boxB, ground], mouseConstraint);
 
 		// run the renderer
 		Render.run(render);
@@ -55,5 +84,13 @@
 
 		// run the engine
 		Runner.run(runner, engine);
+
+		fallingContainer.addEventListener('click', (e)=>{
+			Body.setPosition(boxA,{
+				x:e.clientX,
+				y:e.clientY
+			})
+
+		})
 	</script>
 </html>
