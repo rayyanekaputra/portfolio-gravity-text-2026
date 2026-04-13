@@ -20,8 +20,17 @@
 	</body>
 	<script>
 		//@ts-nocheck
-		import {Engine, Bodies, Render, Runner, Composite, Body } from "matter-js";
-		
+		import {
+			Engine,
+			Bodies,
+			Render,
+			Runner,
+			Composite,
+			Body,
+			Mouse,
+			MouseConstraint,
+		} from "matter-js";
+
 		// call the element
 		const fallingContainer = document.querySelector(".falling-container");
 		// create an engine
