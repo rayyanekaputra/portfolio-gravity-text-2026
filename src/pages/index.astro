@@ -53,6 +53,10 @@
 		let render = Render.create({
 			element: fallingContainer,
 			engine: engine,
+			options:{
+				height: 1000,
+				width: 1000
+			}
 		});
 		Render.run(render);
 		let runner = Runner.create();
