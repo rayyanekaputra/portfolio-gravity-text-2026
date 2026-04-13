@@ -75,11 +75,12 @@
 		let runner = Runner.create();
 		Runner.run(runner, engine);
 
-		fallingContainer.addEventListener("click", (e) => {
-			Body.setPosition(boxA, {
-				x: e.clientX,
-				y: e.clientY,
-			});
-		});
+		// vanilla js version, bad practice
+		// fallingContainer.addEventListener("click", (e) => {
+		// 	Body.setPosition(boxA, {
+		// 		x: e.clientX,
+		// 		y: e.clientY,
+		// 	});
+		// });
 	</script>
 </html>
