@@ -58,6 +58,19 @@
 				width: 1000
 			}
 		});
+
+		// initiating mouse into the engine
+		let mouse = Mouse.create(render.canvas) 
+		let mouseConstraint = MouseConstraint.create(engine, {
+			mouse: mouse,
+
+		})
+
+		// add all of the bodies to the world. 1 world through 1 compositor.
+		console.log(Composite)
+		Composite.add(engine.world, [boxA,boxB,ground]);
+		Composite.add(engine.world, mouseConstraint);
+
 		Render.run(render);
 		let runner = Runner.create();
 		Runner.run(runner, engine);
